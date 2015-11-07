@@ -25,6 +25,24 @@ T power(T a, LL b)
    return a*rem;
 }
 
+template<typename T>
+T power(T a, LL b, T id)
+{
+   if (b==0) return id;
+
+   T rem = id;
+
+   while (b > 1)
+   {
+      if (b%2 == 1) rem = rem * a;
+
+      b = b / 2;
+      a = a * a;
+   }
+
+   return a*rem;
+}
+
 LL power(LL a, LL b, LL mod)
 {
    assert(b>=0);
@@ -95,8 +113,9 @@ LL fibFast(LL n)
 LL isPrime(LL a)
 {
    if (a < 2) return false;
-   LL m = sqrt(a);
-   for(int i=2;i<=m;++i)
+   // make sure to use LL here for i
+   // o/w i*i can overflow!
+   for(LL i=2;i*i<=a;++i)
    {
       if (a % i == 0)
          return false;
@@ -179,4 +198,97 @@ LL invAll(LL* R, LL m)
    {
       R[i] = (m - ((m/i)*R[m%i]) % m) % m;
    }
+}
+
+struct Matrix
+{
+   Matrix(int r, int c)
+   {
+      reset(r,c);
+   }
+
+   Matrix(int r)
+   {
+      reset(r,r);
+      for(int i=0;i<r;++i)
+         A[i][i] = 1;
+   }
+
+
+   LL& operator()(int i, int j)
+   {
+      return A[i][j];
+   }
+
+   Matrix& operator=(const Matrix& rhs);
+
+   vector<vector<LL> > A;
+private:
+   void reset(int r,int c)
+   {
+      assert(r > 0 && c > 0);
+      A.resize(r);
+      for(int i=0;i<r;++i)
+      {
+         A[i].resize(c, 0);
+      }
+   }
+};
+
+Matrix& Matrix::operator=(const Matrix& rhs)
+{
+   A.clear();
+   int r = rhs.A.size();
+   int c = rhs.A[0].size();
+   A.resize(r);
+   for(int i=0;i<r;++i)
+   {
+      A[i].resize(c);
+   }
+   for(int i=0;i<r;++i) for(int j=0;j<c;++j)
+      A[i][j] = rhs.A[i][j];
+
+   return *this;
+}
+
+Matrix operator*(const Matrix& lhs, const Matrix& rhs)
+{
+   int r = lhs.A.size();
+   int mm = lhs.A[0].size();
+   int c = rhs.A[0].size();
+   assert(mm == rhs.A.size());
+   Matrix ret(r,c);
+   for(int i=0;i<r;++i) for(int j=0;j<c;++j) for(int k = 0; k < mm; ++k)
+      ret.A[i][j] += lhs.A[i][k] * rhs.A[k][j];
+
+   return ret;
+}
+
+LL fib(int n)
+{
+   if (n==0) return 0;
+   else if (n==1) return 1;
+   else
+   {
+      LL curr = 1;
+      LL prev = 0;
+      for(int i=2;i<=n;i++)
+      {
+         LL temp = curr + prev;
+         prev = curr;
+         curr = temp;
+      }
+      return curr;
+   }
+}
+
+LL fibFast(int n)
+{
+   Matrix m(2, 2);
+   m(0, 0) = 0;
+   m(0, 1) = 1;
+   m(1, 0) = 1;
+   m(1, 1) = 1;
+   Matrix id(2);
+   return power(m, n, id)(1,0);
 }
