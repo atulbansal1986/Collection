@@ -22,7 +22,7 @@ int main()
       cout << "Test 4 OK" << endl;
    }
 
-   srand (time(NULL));
+   srand (0);
    for(int i=0;i<100000;++i)
    {
       LL x,y;
