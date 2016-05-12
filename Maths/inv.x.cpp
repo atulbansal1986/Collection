@@ -2,10 +2,9 @@
 
 int main()
 {
-   srand(time(NULL));
+   srand(0);
    for (LL i = 0; i < 100000; ++i)
    {
-      LL x, y;
       LL a = rand() % 100000;
       LL n = 1 + rand() % 100000;
       a = a % n;
@@ -56,8 +55,8 @@ int main()
       if (!isPrime(n))
          continue;
 
-      LL R[n];
-      invAll(R, n);
+      vector<LL>R (n, 0);
+      invAll(R);
 
       for(LL x=0;x<n;x++)
       {

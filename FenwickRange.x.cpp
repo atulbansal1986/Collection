@@ -2,7 +2,7 @@
 
 int main()
 {
-   srand (time(NULL));
+   srand (0);
    int n = 20;
    int num_tests = 100000;
    FenwickRange f(n);

@@ -2,7 +2,7 @@
 
 int main()
 {
-   srand (time(NULL));
+   srand (0);
    int rows = 200;
    int cols = 20;
    Fenwick2D f(rows, cols);

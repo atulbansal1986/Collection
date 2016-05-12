@@ -2,12 +2,12 @@
 
 int main()
 {
-   srand (time(NULL));
+   srand (0);
    for(int x = 0; x < 100000; ++x)
    {
-      int n = 1 + rand() % 1000000;
-      int a = rand() % n;
-      int g = gcd(n, a);
+      LL n = 1 + rand() % 1000000;
+      LL a = rand() % n;
+      LL g = gcd(n, a);
       n /= g;
       a /= g;
       if (a==0 || power(a, phi(n), n) == 1) { }

@@ -1,11 +1,9 @@
 #include "Common.h"
 
-
-
 int main()
 {
-   srand (time(NULL));
-   for(int i=0;i<100000;++i)
+   srand (0);
+   for(int i=0;i<10000;++i)
    {
       int n = rand() % 60;
       if (fib(n) != fibFast(n))

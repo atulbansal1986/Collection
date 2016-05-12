@@ -22,9 +22,9 @@ int main()
       cout << "Test 4 OK" << endl;
    }
 
-   int n = 10000;
-   int A[n];
-   buildPrimes(A, n);
+   constexpr int n = 10000;
+   std::array<int, n> A;
+   buildPrimes<int, n>(A);
    bool fail = false;
    for(int i=2;i<n;i++)
    {
@@ -39,8 +39,6 @@ int main()
    {
       cout << "Test Seive Fail" << endl;
    }
-
-
 
    return 0;
 }
