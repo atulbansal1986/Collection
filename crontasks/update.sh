@@ -1,2 +1,2 @@
 
-apt-get upgrade ; apt-get update ; apt-get dist-upgrade ; apt-get autoremove ;
+apt-get --yes upgrade ; apt-get --yes update ; apt-get --yes dist-upgrade ; apt-get --yes autoremove ;
