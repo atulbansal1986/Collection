@@ -42,7 +42,16 @@ struct FixedSizeBetter : public iBetter
 	{
 		return min(10.0 , wealth);
 	}
-	string name() override { return "Fixed"; }
+	string name() override { return "FixedSize"; }
+};
+
+struct FixedRatioBetter : public iBetter
+{
+	double getBetAmount() override
+	{
+		return 0.0002 * wealth;
+	}
+	string name() override { return "FixedRatio"; }
 };
 
 
@@ -56,6 +65,7 @@ int main()
 
 	KellyBetter b1; betters.push_back(&b1);
 	FixedSizeBetter b2; betters.push_back(&b2);
+	FixedRatioBetter b3; betters.push_back(&b3);
 
 	for (size_t i=0; i< ITER; ++i)
 	{
