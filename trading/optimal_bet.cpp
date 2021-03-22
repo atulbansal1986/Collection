@@ -2,7 +2,7 @@
 
 using namespace std;
 
-constexpr double p = 0.51;
+constexpr double p = 0.501;
 
 constexpr size_t ITER = 1e7;
 
@@ -21,6 +21,8 @@ struct iBetter
 
 		if (wealth < 0.0)
 			wealth = 0;
+		if (wealth > 1e25)
+			wealth = 1e25;
 	}
 	virtual double getBetAmount() = 0;
 	virtual string name() = 0;

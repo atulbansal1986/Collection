@@ -1,8 +1,8 @@
 #!/bin/bash -i
 rm a.out
-source ~/.bashrc
+#source ~/.bashrc
 for filename in $(find . -type f -name "*.x.cpp"); do
-d $filename
+g++ $filename
 ./a.out > /dev/null
 if [ $? = 0 ]; then
   echo "$filename passed"
