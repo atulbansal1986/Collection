@@ -2,7 +2,7 @@
 rm a.out
 #source ~/.bashrc
 for filename in $(find . -type f -name "*.x.cpp"); do
-g++ $filename
+d $filename
 ./a.out > /dev/null
 if [ $? = 0 ]; then
   echo "$filename passed"

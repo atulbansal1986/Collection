@@ -21,6 +21,7 @@ struct iBetter
 
 		if (wealth < 0.0)
 			wealth = 0;
+
 		if (wealth > 1e25)
 			wealth = 1e25;
 	}
@@ -56,6 +57,26 @@ struct FixedRatioBetter : public iBetter
 	string name() override { return "FixedRatio"; }
 };
 
+struct RandomRatioBetter : public iBetter
+{
+	double getBetAmount() override
+	{
+		double ratio = double(std::rand() % MOD) / MOD;
+		return ratio * wealth;
+	}
+	string name() override { return "RandomRatio"; }
+};
+
+
+struct AllInBetter : public iBetter
+{
+	double getBetAmount() override
+	{
+		return wealth;
+	}
+	string name() override { return "AllIn"; }
+};
+
 
 
 int main()
@@ -68,8 +89,10 @@ int main()
 	KellyBetter b1; betters.push_back(&b1);
 	FixedSizeBetter b2; betters.push_back(&b2);
 	FixedRatioBetter b3; betters.push_back(&b3);
+	RandomRatioBetter b4; betters.push_back(&b4);
+	AllInBetter b5; betters.push_back(&b5);
 
-	for (size_t i=0; i< ITER; ++i)
+	for (size_t i = 0; i < ITER; ++i)
 	{
 		size_t random_variable = std::rand() % MOD + 1;
 		if (random_variable <= (p * MOD))
