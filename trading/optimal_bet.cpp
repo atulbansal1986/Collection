@@ -2,7 +2,7 @@
 
 using namespace std;
 
-constexpr double p = 0.501;
+constexpr double p = 0.49;
 
 constexpr size_t ITER = 1e7;
 
@@ -34,7 +34,7 @@ struct KellyBetter : public iBetter
 {
 	double getBetAmount() override
 	{
-		return wealth * (2*p -1);
+		return wealth * std::max((2*p -1), 0.0);
 	}
 	string name() override { return "Kelly"; }
 };
