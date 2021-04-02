@@ -1,6 +1,7 @@
 #include "Common.h"
+#include <gtest/gtest.h>
 
-int main()
+TEST(MathTests, FibTest)
 {
    srand (0);
    for(int i=0;i<10000;++i)
@@ -9,10 +10,7 @@ int main()
       if (fib(n) != fibFast(n))
       {
          cout << "Test failed for " << n << endl;
-         exit(0);
+         EXPECT_EQ(1, 0);
       }
    }
-   cout << "All tests OK" << endl;
-
-	return 0;
 }

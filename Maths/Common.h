@@ -2,14 +2,16 @@
 
 using namespace std;
 
-typedef long long LL;
+using int64_t =  int64_t;
+
 #define vi vector<int>
 #define pb push_back
-#define endl "\n"
 
 template<typename T>
-T power(T a, LL b)
+T power(T a, int64_t b)
 {
+   assert(b >= 0);
+
    if (b == 0)
       return 1;
 
@@ -28,8 +30,10 @@ T power(T a, LL b)
 }
 
 template<typename T>
-T power(T a, LL b, T id)
+T power(T a, int64_t b, T id)
 {
+   assert(b >= 0);
+
    if (b == 0)
       return id;
 
@@ -47,13 +51,13 @@ T power(T a, LL b, T id)
    return a * rem;
 }
 
-LL power(LL a, LL b, LL mod)
+int64_t power_mod(int64_t a, int64_t b, int64_t mod)
 {
    assert(b >= 0);
    if (b == 0)
       return 1;
 
-   LL rem = 1;
+   int64_t rem = 1;
 
    while (b > 1)
    {
@@ -67,48 +71,56 @@ LL power(LL a, LL b, LL mod)
    return (a * rem) % mod;
 }
 
-LL gcd(LL a, LL b)
+int64_t gcd(int64_t a, int64_t b)
 {
    if (a < b)
+   {
       swap(a, b);
+   }
+
    while (b > 0)
    {
-      LL temp = a % b;
+      int64_t temp = a % b;
       a = b;
       b = temp;
    }
+
    return a;
 }
 
-LL gcdExt(LL a, LL b, LL& x, LL& y)
+int64_t gcdExt(int64_t a, int64_t b, int64_t& x, int64_t& y)
 {
    if (a < b)
+   {
       return gcdExt(b, a, y, x);
+   }
+
    if (b == 0)
    {
       x = 1;
       y = 0;
       return a;
-   } else
+   }
+   else
    {
-      LL x1, y1;
-      LL g = gcdExt(b, a % b, x1, y1);
+      int64_t x1{0}, y1{0};
+      int64_t g = gcdExt(b, a % b, x1, y1);
       x = y1;
       y = x1 - (a / b) * y1;
       return g;
    }
 }
 
-LL lcm(LL a, LL b)
+int64_t lcm(int64_t a, int64_t b)
 {
    return a * b / gcd(a, b);
 }
 
-LL fact(LL n, LL mod)
+int64_t fact(int64_t n, int64_t mod)
 {
    if (n == 0)
       return 0;
-   LL ret = 1;
+   int64_t ret = 1;
    while (n > 0)
    {
       ret = (ret * n) % mod;
@@ -117,13 +129,13 @@ LL fact(LL n, LL mod)
    return ret;
 }
 
-LL isPrime(LL a)
+int64_t isPrime(int64_t a)
 {
    if (a < 2)
       return false;
-   // make sure to use LL here for i
+   // make sure to use int64_t here for i
    // o/w i*i can overflow!
-   for (LL i = 2; i * i <= a; ++i)
+   for (int64_t i = 2; i * i <= a; ++i)
    {
       if (a % i == 0)
          return false;
@@ -157,18 +169,18 @@ void buildPrimes(array<T, N>& A)
    }
 }
 
-LL phi(LL n)
+int64_t phi(int64_t n)
 {
-   vector<LL> pfacts;
-   LL m = (LL)sqrt(n);
-   for (LL i = 1; i <= m; i++)
+   vector<int64_t> pfacts;
+   int64_t m = (int64_t)sqrt(n);
+   for (int64_t i = 1; i <= m; i++)
    {
       if (n % i == 0)
       {
          if (isPrime(i))
             pfacts.pb(i);
 
-         LL d = n / i;
+         int64_t d = n / i;
          if (isPrime(d) && i < d)
             pfacts.pb(d);
       }
@@ -183,29 +195,29 @@ LL phi(LL n)
    return n;
 }
 
-LL inv(LL a, LL n)
+int64_t inv(int64_t a, int64_t n)
 {
-   LL x, y;
-   LL g = gcdExt(a, n, x, y);
+   int64_t x, y;
+   int64_t g = gcdExt(a, n, x, y);
    if (g != 1)
       return -1;
    else
       return (x % n + n) % n;
 }
 
-LL invExp(LL a, LL n)
+int64_t invExp(int64_t a, int64_t n)
 {
-   LL p = phi(n) - 1;
+   int64_t p = phi(n) - 1;
    return power(a, p, n);
 }
 
-void invAll(vector<LL>& R)
+void invAint64_t(vector<int64_t>& R)
 {
-   LL m = (LL)R.size();
+   int64_t m = (int64_t)R.size();
    assert(isPrime(m));
    R[0] = 0;
    R[1] = 1;
-   for (LL i = 2; i < m; ++i)
+   for (int64_t i = 2; i < m; ++i)
    {
       R[i] = (m - ((m / i) * R[m % i]) % m) % m;
    }
@@ -213,28 +225,28 @@ void invAll(vector<LL>& R)
 
 struct Matrix
 {
-   Matrix(LL r, LL c)
+   Matrix(int64_t r, int64_t c)
    {
       reset(r, c);
    }
 
-   Matrix(LL r)
+   Matrix(int64_t r)
    {
       reset(r, r);
-      for (LL i = 0; i < r; ++i)
+      for (int64_t i = 0; i < r; ++i)
          A[i][i] = 1;
    }
 
-   LL& operator()(LL i, LL j)
+   int64_t& operator()(int64_t i, int64_t j)
    {
       return A[i][j];
    }
 
    Matrix& operator=(const Matrix& rhs);
 
-   vector<vector<LL> > A;
+   vector<vector<int64_t> > A;
 private:
-   void reset(LL r, LL c)
+   void reset(int64_t r, int64_t c)
    {
       assert(r > 0 && c > 0);
       A.resize(r);
@@ -248,8 +260,8 @@ private:
 Matrix& Matrix::operator=(const Matrix& rhs)
 {
    A.clear();
-   LL r = rhs.A.size();
-   LL c = rhs.A[0].size();
+   int64_t r = rhs.A.size();
+   int64_t c = rhs.A[0].size();
    A.resize(r);
    for (int i = 0; i < r; ++i)
    {
@@ -264,20 +276,20 @@ Matrix& Matrix::operator=(const Matrix& rhs)
 
 Matrix operator*(const Matrix& lhs, const Matrix& rhs)
 {
-   LL r = (LL)lhs.A.size();
-   LL mm = (LL)lhs.A[0].size();
-   LL c = (LL)rhs.A[0].size();
-   assert(mm == (LL)rhs.A.size());
+   int64_t r = (int64_t)lhs.A.size();
+   int64_t mm = (int64_t)lhs.A[0].size();
+   int64_t c = (int64_t)rhs.A[0].size();
+   assert(mm == (int64_t)rhs.A.size());
    Matrix ret(r, c);
-   for (LL i = 0; i < r; ++i)
-      for (LL j = 0; j < c; ++j)
-         for (LL k = 0; k < mm; ++k)
+   for (int64_t i = 0; i < r; ++i)
+      for (int64_t j = 0; j < c; ++j)
+         for (int64_t k = 0; k < mm; ++k)
             ret.A[i][j] += lhs.A[i][k] * rhs.A[k][j];
 
    return ret;
 }
 
-LL fib(int n)
+int64_t fib(int n)
 {
    if (n == 0)
       return 0;
@@ -285,11 +297,11 @@ LL fib(int n)
       return 1;
    else
    {
-      LL curr = 1;
-      LL prev = 0;
+      int64_t curr = 1;
+      int64_t prev = 0;
       for (int i = 2; i <= n; i++)
       {
-         LL temp = curr + prev;
+         int64_t temp = curr + prev;
          prev = curr;
          curr = temp;
       }
@@ -297,7 +309,7 @@ LL fib(int n)
    }
 }
 
-LL fibFast(int n)
+int64_t fibFast(int n)
 {
    Matrix m(2, 2);
    m(0, 0) = 0;

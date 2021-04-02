@@ -1,5 +1,10 @@
+CMakeCache*
+CMakeFiles*
+Make*
+cmake_*
+*.log
+.git/
+build*
+*.tar.*
 *.out
-*.swp
-.cproject
-.project
-.settings/
+Testing*
