@@ -13,3 +13,11 @@ gtest_discover_tests(gcd)
 add_executable(pow pow.t.cpp)
 target_link_libraries(pow gtest_main)
 gtest_discover_tests(pow)
+
+add_executable(prime prime.t.cpp)
+target_link_libraries(prime gtest_main)
+gtest_discover_tests(prime)
+
+add_executable(phi phi.t.cpp)
+target_link_libraries(phi gtest_main)
+gtest_discover_tests(phi)
