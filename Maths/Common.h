@@ -204,7 +204,7 @@ int64_t inv(int64_t a, int64_t n)
 int64_t invExp(int64_t a, int64_t n)
 {
    int64_t p = phi(n) - 1;
-   return power(a, p, n);
+   return power_mod(a, p, n);
 }
 
 void invALL(vector<int64_t>& R)

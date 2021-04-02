@@ -25,3 +25,7 @@ gtest_discover_tests(phi)
 add_executable(fact_lcm fact_lcm.t.cpp)
 target_link_libraries(fact_lcm gtest_main)
 gtest_discover_tests(fact_lcm)
+
+add_executable(inv inv.t.cpp)
+target_link_libraries(inv gtest_main)
+gtest_discover_tests(inv)
