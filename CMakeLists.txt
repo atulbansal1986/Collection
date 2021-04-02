@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.19.4)
 project(Collection)
 
 add_subdirectory(Maths)
+add_subdirectory(DataStrucutures)
 
 # GoogleTest requires at least C++11
 set(CMAKE_CXX_STANDARD 20)
