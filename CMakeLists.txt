@@ -26,16 +26,11 @@ SET(GCC_COMPILE_FLAGS "-Wall -Wextra -pedantic -std=c++2a \
 SET(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} ${GCC_COMPILE_FLAGS}")
 SET(CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} ${GCC_COMPILE_FLAGS}")
 
-add_executable(
-  hello
-  hello.cpp
-)
-
-target_link_libraries(
-  hello
-  gtest_main
-)
 
 include(GoogleTest)
 
+add_executable(hello hello.t.cpp)
+target_link_libraries(hello gtest_main)
 gtest_discover_tests(hello)
+
+
