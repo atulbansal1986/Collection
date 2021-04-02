@@ -2,10 +2,6 @@
 
 using namespace std;
 
-using int64_t =  int64_t;
-
-#define vi vector<int>
-#define pb push_back
 
 template<typename T>
 T power(T a, int64_t b)
@@ -178,11 +174,11 @@ int64_t phi(int64_t n)
       if (n % i == 0)
       {
          if (isPrime(i))
-            pfacts.pb(i);
+            pfacts.push_back(i);
 
          int64_t d = n / i;
          if (isPrime(d) && i < d)
-            pfacts.pb(d);
+            pfacts.push_back(d);
       }
    }
 
@@ -211,7 +207,7 @@ int64_t invExp(int64_t a, int64_t n)
    return power(a, p, n);
 }
 
-void invAint64_t(vector<int64_t>& R)
+void invALL(vector<int64_t>& R)
 {
    int64_t m = (int64_t)R.size();
    assert(isPrime(m));
